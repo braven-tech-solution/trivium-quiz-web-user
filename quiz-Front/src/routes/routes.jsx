@@ -29,6 +29,7 @@ import Contact from "../pages/Contact/Contact";
 import CoursePlan from "../Components/CoursePlan";
 import Quotation from "../pages/Quotation/Quotation";
 import QuotationManage from "../pages/Dashboard/QuotationManage/QuotationManage";
+import Leaderboard from "../pages/Dashboard/Leaderboard/Leaderboard";
 
 export const router = createBrowserRouter([
   {
@@ -121,6 +122,10 @@ export const router = createBrowserRouter([
           {
             path: "/dashboard/orders/",
             element: <Shipping></Shipping>,
+          },
+          {
+            path: "/dashboard/leaderboard/",
+            element: <Leaderboard />,
           },
           {
             path: "/dashboard/customers-orders/",

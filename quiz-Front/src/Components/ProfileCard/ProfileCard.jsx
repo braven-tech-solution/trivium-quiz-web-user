@@ -19,7 +19,7 @@ const ProfileCard = () => {
           className=" px-3 w-full hover:text-white text-black  py-1  hover:bg-yellow-500 rounded"
           to="/dashboard/profile"
         >
-          Leaderboard
+          Profile
         </Link>
       </div>
       <div className="flex px-3 mt-2 items-start justify-start pb-5">
