@@ -30,6 +30,8 @@ import CoursePlan from "../Components/CoursePlan";
 import Quotation from "../pages/Quotation/Quotation";
 import QuotationManage from "../pages/Dashboard/QuotationManage/QuotationManage";
 import Leaderboard from "../pages/Dashboard/Leaderboard/Leaderboard";
+import Quiz from "../pages/Quiz/Quiz";
+import LevelCategory from "../pages/Levels/LevelCategory";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +57,14 @@ export const router = createBrowserRouter([
           {
             path: "/contact",
             element: <Contact />,
+          },
+          {
+            path: "/levels/quiz",
+            element: <Quiz />,
+          },
+          {
+            path: "/levels",
+            element: <LevelCategory />,
           },
           {
             path: "/our-courses",
