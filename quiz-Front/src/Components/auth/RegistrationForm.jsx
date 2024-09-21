@@ -18,24 +18,26 @@ const RegistrationForm = () => {
     handleSubmit,
     formState: { errors },
     setError,
+    watch,
     reset,
   } = useForm();
 
   const submitForm = async (formData) => {
     // toast.success("Account Create Successfully.");
-    // console.log();
+    console.log(formData);
+    const { confirmPassword, ...newFormData } = formData;
     try {
-      const res = await fetch(`${baseURL}/user/sign-up`, {
+      const res = await fetch(`${baseURL}/users/signup`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(newFormData),
       });
 
       const data = await res.json();
-      // console.log(data);
-      if (data?.status === "success") {
+      console.log(data);
+      if (data?.success) {
         toast.success(data.message);
         setLoading(false);
       } else {
@@ -52,25 +54,30 @@ const RegistrationForm = () => {
   };
 
   return (
-    <section className="container bg-[#0866FF]/50 h-screen">
-      <div className="w-full md:w-1/3 mx-auto bg-[#fff] p-8 rounded-md ">
-        <h2 className="text-2xl font-bold mb-6">Register</h2>
+    <section className="container bg-[#ffff]/50 h-screen">
+      <h2 className="text-2xl font-bold mb-6 text-center text-[#4338CA]">
+        {" "}
+        Start Your Learning Journey With Us.
+      </h2>
+
+      <div className="w-full md:w-1/3 mx-auto bg-[#fff] px-8 rounded-md ">
+        <h2 className="text-2xl font-bold mb-2 text-center">Register</h2>
         <form onSubmit={handleSubmit(submitForm)}>
-          <Field label="First Name" error={errors.firstName}>
+          <Field label="Name" error={errors.fullName}>
             <input
-              {...register("firstName", {
-                required: "First Name is Required",
+              {...register("fullName", {
+                required: "Name is Required",
               })}
               className={`border ${
-                !!errors.firstName ? "border-red-500" : "border-white/20 "
+                !!errors.name ? "border-red-500" : "border-white/20 "
               } w-full p-3 bg-[#c1f0f0] border-b-black  rounded-md focus:outline-none focus:border-indigo-500`}
-              type="firstName"
-              name="firstName"
-              id="firstName"
-              placeholder="ex: John"
+              type="fullName"
+              name="fullName"
+              id="fullName"
+              placeholder="ex: John Watson"
             />
           </Field>
-          <Field label="Last Name" error={errors.lastName}>
+          {/* <Field label="Last Name" error={errors.lastName}>
             <input
               {...register("lastName")}
               className={`border ${
@@ -81,7 +88,7 @@ const RegistrationForm = () => {
               id="lastName"
               placeholder="ex: Doe"
             />
-          </Field>
+          </Field> */}
           <Field label="Email" error={errors.email}>
             <input
               {...register("email", { required: "Email ID is Required" })}
@@ -130,10 +137,29 @@ const RegistrationForm = () => {
             />
           </Field> */}
 
-          <Field label="Password" error={errors.password}>
+          {/* <Field label="Password" error={errors.password}>
             <input
               {...register("password", {
                 required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Your password must be at least 6 characters",
+                },
+              })}
+              className={`border ${
+                !!errors.password ? "border-red-500" : "border-white/20 "
+              } w-full p-3 bg-[#c1f0f0] border-b-black  rounded-md focus:outline-none focus:border-indigo-500`}
+              type="password"
+              name="password"
+              id="password"
+              placeholder="password"
+            />
+          </Field>
+
+          <Field label="Confirm Password" error={errors.password}>
+            <input
+              {...register("confirmPassword", {
+                required: "Confirm Password is required",
                 minLength: {
                   value: 6,
                   message: "Your password must be at least 8 characters",
@@ -147,7 +173,44 @@ const RegistrationForm = () => {
               id="password"
               placeholder="password"
             />
+          </Field> */}
+
+          <Field label="Password" error={errors.password}>
+            <input
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6, // Ensure this matches the message (8 characters)
+                  message: "Your password must be at least 6 characters",
+                },
+              })}
+              className={`border ${
+                !!errors.password ? "border-red-500" : "border-white/20 "
+              } w-full p-3 bg-[#c1f0f0] border-b-black  rounded-md focus:outline-none focus:border-indigo-500`}
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+            />
           </Field>
+
+          <Field label="Confirm Password" error={errors.confirmPassword}>
+            <input
+              {...register("confirmPassword", {
+                required: "Confirm Password is required",
+                validate: (value) =>
+                  value === watch("password") || "Passwords do not match", // Validate confirm password
+              })}
+              className={`border ${
+                !!errors.confirmPassword ? "border-red-500" : "border-white/20 "
+              } w-full p-3 bg-[#c1f0f0] border-b-black  rounded-md focus:outline-none focus:border-indigo-500`}
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              placeholder="Confirm Password"
+            />
+          </Field>
+
           <p>{errors?.root?.random?.message}</p>
           <Field>
             <button

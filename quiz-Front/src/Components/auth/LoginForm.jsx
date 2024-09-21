@@ -28,7 +28,7 @@ const LoginForm = () => {
     // console.log("clicked");
     setLoading(true);
     try {
-      const res = await fetch(`${baseURL}/user/login`, {
+      const res = await fetch(`${baseURL}/users/login`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -37,7 +37,7 @@ const LoginForm = () => {
       });
 
       const data = await res.json();
-      if (data?.status === "success") {
+      if (data?.success) {
         setUser(data.data);
         toast.success(data.message);
         setLoading(false);
