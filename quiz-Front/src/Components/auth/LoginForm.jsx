@@ -24,8 +24,39 @@ const LoginForm = () => {
     reset,
   } = useForm();
 
+  // const submitForm = async (formData) => {
+
+  //   // console.log("clicked");
+  //   setLoading(true);
+  //   try {
+  //     const res = await fetch(`${baseURL}/users/login`, {
+  //       method: "POST",
+  //       headers: {
+  //         "content-type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+
+  //     const data = await res.json();
+  //     if (data?.success) {
+  //       setUser(data.data);
+  //       toast.success(data.message);
+  //       setLoading(false);
+  //       navigate(from, { replace: true });
+  //       localStorage.setItem("accessToken", data.data.accessToken);
+  //     } else {
+  //       toast.error(data.message);
+  //       setLoading(false);
+  //     }
+  //   } catch (err) {
+  //     toast.error(err?.message);
+  //     console.log(err);
+  //     setLoading(false);
+  //   }
+  //   reset();
+  // };
+
   const submitForm = async (formData) => {
-    // console.log("clicked");
     setLoading(true);
     try {
       const res = await fetch(`${baseURL}/users/login`, {
@@ -38,21 +69,23 @@ const LoginForm = () => {
 
       const data = await res.json();
       if (data?.success) {
-        setUser(data.data);
-        toast.success(data.message);
-        setLoading(false);
-        navigate(from, { replace: true });
+        // Store the user data in localStorage
+        localStorage.setItem("user", JSON.stringify(data.data));
         localStorage.setItem("accessToken", data.data.accessToken);
+
+        setUser(data.data); // Update context with user data
+        toast.success(data.message);
+        navigate(from, { replace: true });
       } else {
         toast.error(data.message);
-        setLoading(false);
       }
     } catch (err) {
       toast.error(err?.message);
       console.log(err);
+    } finally {
       setLoading(false);
+      reset();
     }
-    reset();
   };
 
   return (
