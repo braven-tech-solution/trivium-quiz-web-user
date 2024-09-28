@@ -59,7 +59,7 @@ export const router = createBrowserRouter([
             element: <Contact />,
           },
           {
-            path: "/levels/quiz",
+            path: "/levels/quiz/:id",
             element: <Quiz />,
           },
           {

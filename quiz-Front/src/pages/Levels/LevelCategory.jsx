@@ -1,22 +1,5 @@
-import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuizLevel } from "../../hooks/quizhooks/useQuizLevel";
-
-// const levels = [
-//   {
-//     level: "Level I",
-//     questions: 7,
-//     time: "20 Min",
-//     progress: 25, // Progress percentage
-//   },
-//   {
-//     level: "Level II",
-//     questions: 7,
-//     time: "20 Min",
-//     progress: 25, // You can adjust the progress as per actual data
-//   },
-//   // Add more levels as required
-// ];
 
 const LevelCategory = () => {
   const navigate = useNavigate();
@@ -31,16 +14,11 @@ const LevelCategory = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  const navigateToQuiz = () => {
-    navigate("/levels/quiz");
+  const navigateToQuiz = (id) => {
+    navigate(`/levels/quiz/${id}`);
   };
 
   return (
-    // <div>
-    //   {levels.map((level) => (
-    //     <div key={level.id}>{level.name}</div>
-    //   ))}
-    // </div>
     <div className="p-4">
       <h2 className="text-2xl font-semibold mb-4">
         Sub-Category-{levels?.length}
@@ -49,7 +27,7 @@ const LevelCategory = () => {
         <div
           key={level._id}
           className="bg-white shadow-md rounded-lg p-4 mb-4 border border-gray-200  cursor-pointer"
-          onClick={navigateToQuiz}
+          onClick={() => navigateToQuiz(level._id)}
         >
           <div className="flex justify-between items-center">
             <div>
