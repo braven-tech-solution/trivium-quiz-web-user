@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useQuizData } from "../../hooks/quizhooks/useQuizData";
 import { useParams } from "react-router-dom";
-import { accessToken } from "../../Configs/libs";
+import { baseURL } from "../../Configs/libs";
+import { toast } from "react-toastify";
 
 const Quiz = () => {
   const { id } = useParams();
@@ -30,14 +31,14 @@ const Quiz = () => {
   };
 
   const handleSubmit = async () => {
-    const apiUrl = `http://localhost:8000/api/v1/level/submit/${id}`;
+    const apiUrl = `${baseURL}/level/submit/${id}`;
 
     try {
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: accessToken,
+          Authorization: localStorage.getItem("accessToken"),
         },
         body: JSON.stringify(answers),
       });
@@ -47,6 +48,7 @@ const Quiz = () => {
       }
 
       const data = await response.json();
+      toast.success(data.message);
       console.log("Submission successful:", data);
     } catch (error) {
       console.error("Error submitting answers:", error);
