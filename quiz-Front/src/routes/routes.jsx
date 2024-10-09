@@ -5,23 +5,16 @@ import RegistrationForm from "../Components/auth/RegistrationForm";
 
 import MainLayout from "../Layouts/MainLayout";
 import SideBarLayout from "../Layouts/SidebarLayout";
-import Checkout from "../Components/Checkout/Checkout";
-import OrderPlaced from "../pages/OrderPlaced/OrderPlaced";
 
 import Home from "../pages/Home";
 import DashboardLayout from "../Layouts/DashbordLayout/DashboardLayout";
 import Profile from "../pages/Dashboard/Profile/Profile";
 
-import CustomerOrders from "../pages/Dashboard/CustomerOrders/CustomerOrders";
-
-import BannerManage from "../pages/Dashboard/BannerManage";
 import PasswordChange from "../pages/Dashboard/PasswordChange/PasswordChange";
 import Setting from "../pages/Dashboard/Setting/Setting";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 
-import Quotation from "../pages/Quotation/Quotation";
-import QuotationManage from "../pages/Dashboard/QuotationManage/QuotationManage";
 import Leaderboard from "../pages/Dashboard/Leaderboard/Leaderboard";
 import Quiz from "../pages/Quiz/Quiz";
 import LevelCategory from "../pages/Levels/LevelCategory";
@@ -62,18 +55,6 @@ export const router = createBrowserRouter([
             ),
           },
 
-          {
-            path: "/checkout",
-            element: <Checkout></Checkout>,
-          },
-          {
-            path: "/quotation",
-            element: <Quotation></Quotation>,
-          },
-          {
-            path: "/orderPlaced/:orderedId",
-            element: <OrderPlaced></OrderPlaced>,
-          },
           // {
           //   path: "/searchedproduct/filtered",
           //   element: <SearchedProduct></SearchedProduct>,
@@ -104,19 +85,6 @@ export const router = createBrowserRouter([
           {
             path: "/dashboard/leaderboard/",
             element: <Leaderboard />,
-          },
-          {
-            path: "/dashboard/customers-orders/",
-            element: <CustomerOrders></CustomerOrders>,
-          },
-
-          {
-            path: "/dashboard/quotationManage",
-            element: <QuotationManage></QuotationManage>,
-          },
-          {
-            path: "/dashboard/banners",
-            element: <BannerManage></BannerManage>,
           },
 
           {
