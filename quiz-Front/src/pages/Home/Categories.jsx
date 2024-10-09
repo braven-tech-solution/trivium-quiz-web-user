@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuizCategories } from "../../hooks/quizhooks/useQuizCategories";
+import img from "../../assets/category/1.png";
 
 const Categories = () => {
   const navigate = useNavigate();
@@ -19,9 +20,12 @@ const Categories = () => {
           <div
             key={category?._id}
             onClick={() => navigateToSubCategory(category?._id)}
-            className="bg-[#037E83] w-[300px] h-[300px] mx-auto rounded flex justify-center items-center font-semibold text-xl cursor-pointer"
+            className="bg-[#037E83] w-[300px] h-[300px] mx-auto rounded flex flex-col justify-center items-center font-semibold text-xl cursor-pointer"
           >
-            <p>{category.name}</p>
+            <img src={img} alt="" />
+            <p className="bg-white w-[80%] text-center rounded-md hover:bg-[#6F9A31] hover:text-white transition-all duration-500">
+              {category.name}
+            </p>
           </div>
         ))}
       </div>

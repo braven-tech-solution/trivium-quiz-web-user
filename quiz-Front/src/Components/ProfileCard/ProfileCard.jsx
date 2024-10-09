@@ -16,7 +16,7 @@ const ProfileCard = () => {
       </h1>
       <div className="flex items-center justify-start flex-col text-sm capitalize ">
         <Link
-          className=" px-3 w-full hover:text-white text-black  py-1  hover:bg-yellow-500 rounded"
+          className=" text-xl px-3 w-full hover:text-white text-[#008081]  py-1  hover:bg-yellow-500 rounded"
           to="/dashboard/profile"
         >
           Profile

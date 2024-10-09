@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useQuizData } from "../../hooks/quizhooks/useQuizData";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { baseURL } from "../../Configs/libs";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const Quiz = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { quizData } = useQuizData(id);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -48,7 +49,10 @@ const Quiz = () => {
       }
 
       const data = await response.json();
+
       toast.success(data.message);
+      navigate("/");
+
       console.log("Submission successful:", data);
     } catch (error) {
       console.error("Error submitting answers:", error);
@@ -74,7 +78,7 @@ const Quiz = () => {
   }
 
   return (
-    <div className="max-w-xl mx-auto p-4 bg-white rounded shadow">
+    <div className="max-w-xl mx-auto p-4 bg-[#A0DCD8] rounded shadow">
       <h1 className="text-2xl font-semibold mb-4">
         Quiz - {quizData[currentQuestion]?.model_type}
       </h1>
